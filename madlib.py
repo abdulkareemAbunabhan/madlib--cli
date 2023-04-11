@@ -8,7 +8,7 @@ def read_template(arg):
 
 def parse_template(tex):
     content=tex
-    pattern=r"{(\w+)}"
+    pattern=r"{([\w\s'-]+)}"  
     matches = re.sub(pattern,"{}", content)
     result = re.findall(pattern, content)
     buple = ()
@@ -18,9 +18,9 @@ def parse_template(tex):
      buple = tuple(y)
 
     return matches,buple
-def merge(tex,tuple):
+def merge(str,tuple):
     y = list(tuple)
-    txt = tex.format(*y)
+    txt = str.format(*y)
     return txt
 
 
@@ -40,5 +40,5 @@ if __name__ == "__main__":
      x = tuple(y)
     text = merge(stripped_template, x)
     print(text)
-    with open("madlib_cli/assets/text.txt", "w") as file:
+    with open("assets/output.txt", "w") as file:
         opened_file =file.write(text)
